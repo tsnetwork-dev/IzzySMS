@@ -31,8 +31,8 @@
                             <span class="card-title grey-text text-darken-4">{{$chipeira->ip}}<i class="material-icons right">close</i></span>
                             <p><b>Númeoro de Série: </b>{{$chipeira->Serial}}<br>
                             <b>Portas: </b>{{$chipeira->Portas}}<br>
-                            <b>Data de Criação: </b>{{date ('d/m/Y H:i:s',strtotime($chipeira->created_at))}}<br>
-                            <b>Data de Atualização: </b>{{date ('d/m/Y H:i:s',strtotime($chipeira->updated_at))}}</p>
+                            <b>Mensagens Mês:</b> <b class="blue-text">{{ $chipeira->total }}</b><br>
+
                             <span><a href="http://{{$chipeira->ip}}/">Acessar Equipamento</a></span>
                         </div>
                     </div>

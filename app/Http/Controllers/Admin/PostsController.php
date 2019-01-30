@@ -12,14 +12,88 @@ class PostsController extends Controller
 {
     public function index()
     {
+        $todas = DB::table('posts')
+                   ->count();
 
-        $mensagem = Posts::orderBy('enviado','desc')->paginate(15);
-        return view('admin.posts.index',compact('mensagem'));
+        $enviadas = DB::table('posts')
+                    ->where('status','SENT_OK')
+                    ->count();
+        $recebidas = DB::table('posts')
+                       ->where('status','DELIVERED')
+                       ->count();
+        $falhas = DB::table('posts')
+                       ->where('status','FAILED')
+                       ->count();
+
+        $lava = new Lavacharts;
+
+        $mensagens = $lava->DataTable();
+
+        $mensagens->addStringColumn('Todas as Mensagens')
+                   ->addNumberColumn('Todas')
+                   ->addNumberColumn('Erros')
+                   ->addNumberColumn('Enviadas')
+                   ->addNumberColumn('Entrege')
+                   ->addRow(['Mensagens',$todas,$falhas,$enviadas,$recebidas]);
+
+        $lava->ColumnChart('Mensagens', $mensagens, [
+            'title' => 'Todas Mensagens',
+            'legend' => [
+                'position' => 'in'
+            ],
+            'is3D'   => true
+        ]);
+
+        return view('admin.posts.index2',compact('lava'));
 
 
     }
 
-    public function nova()
+    public function lista()
+    {
+        $mensagem = Posts::orderBy('enviado','desc')->paginate(15);
+        $totais = Posts::count();
+
+        return view('admin.posts.index',compact('mensagem','totais'));
+    }
+
+    public function msgEnviadas()
+    {
+        $mensagem = DB::table('posts')
+                        ->where('status','SENT_OK')
+                        ->paginate(15);
+        $totais = DB::table('posts')
+                    ->where('status','SENT_OK')
+                    ->count();
+
+        return view('admin.posts.index',compact('mensagem','totais'));
+    }
+
+    public function msgEntregas()
+    {
+        $mensagem = DB::table('posts')
+                        ->where('status','DELIVERED')
+                        ->paginate(15);
+
+        $totais = DB::table('posts')
+                    ->where('status','DELIVERED')
+                    ->count();
+        return view('admin.posts.index',compact('mensagem','totais'));
+    }
+
+    public function msgFalhas()
+    {
+        $mensagem = DB::table('posts')
+                        ->where('status','FAILED')
+                        ->paginate(15);
+        $totais = DB::table('posts')
+                    ->where('status','FAILED')
+                    ->count();
+
+        return view('admin.posts.index',compact('mensagem','totais'));
+    }
+
+        public function nova()
     {
         return view('admin.posts.nova');
     }

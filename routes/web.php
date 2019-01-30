@@ -24,7 +24,7 @@ Route::get('/admin/login',['as'=>'admin.login', function(){
 Route::group(['prefix'=>'api'],function(){
 
     Route::group(['prefix'=>'envio'],function(){
-        
+
        Route::get('',['uses'=>'Api\SmsController@index']);
        Route::get('{fone}/{mensagem}/{obs}',['uses' => 'Api\SmsController@enviar']);
     });
@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function(){
         }]);*/
 
         Route::get('/',[
-            'as'=>'admin.principal', 
+            'as'=>'admin.principal',
             'uses'=>'Admin\PrincipalController@index'
         ]);
 
@@ -100,10 +100,34 @@ Route::middleware(['auth'])->group(function(){
                 'as'=>'admin.posts.nova',
                 'uses'=>'Admin\PostsController@nova'
                 ]);
+
+            Route::get('/admin/posts/lista',[
+                'as'=>'admin.posts.lista',
+                'uses'=>'Admin\PostsController@lista'
+                ]);
+
+
+            Route::get('/admin/posts/enviadas',[
+                'as'=>'admin.posts.enviadas',
+                'uses'=>'Admin\PostsController@msgEnviadas'
+                ]);
+
+            Route::get('/admin/posts/entregas',[
+                'as'=>'admin.posts.entregas',
+                'uses'=>'Admin\PostsController@msgEntregas'
+                ]);
+
+            Route::get('/admin/posts/falhas',[
+                'as'=>'admin.posts.falhas',
+                'uses'=>'Admin\PostsController@msgFalhas'
+                ]);
+
             Route::post('/admin/posts/enviar',[
                 'as'=>'admin.posts.enviar',
                 'uses'=>'Admin\PostsController@enviar'
                 ]);
+
+
 
 
 
@@ -135,6 +159,11 @@ Route::middleware(['auth'])->group(function(){
                 'uses'=>'Admin\CampanhaController@index'
                 ]);
 
+            Route::get('/admin/campanha/campanha/{id}',[
+                'as'=>'admin.campanha.campanha',
+                'uses'=>'Admin\CampanhaController@campanha'
+                ]);
+
             Route::get('/admin/campanha/nova',[
                 'as'=>'admin.campanha.nova',
                 'uses'=>'Admin\CampanhaController@nova'
@@ -144,6 +173,26 @@ Route::middleware(['auth'])->group(function(){
                 'as'=>'admin.campanha.envio',
                 'uses'=>'Admin\CampanhaController@envio'
                 ]);
+
+            Route::get('/admin/campanha/status/{id}',[
+                'as'=>'admin.campanha.status',
+                'uses'=>'Admin\CampanhaController@status'
+                ]);
+
+            Route::get('/admin/campanha/detalhe/{fone}/{campanha}',[
+                'as'=>'admin.campanha.detalhe',
+                'uses'=>'Admin\CampanhaController@detalhe'
+                ]);
+
+            Route::get('/admin/campanha/entregue/{fone}/{campanha}',[
+                'as'=>'admin.campanha.entregue',
+                'uses'=>'Admin\CampanhaController@detalheEntregue'
+                ]);
+
+            Route::get('/admin/campanha/erro/{fone}/{campanha}',[
+                'as'=>'admin.campanha.erro',
+                'uses'=>'Admin\CampanhaController@detalheErro'
+            ]);
 
             Route::get('/admin/campanha/enviar/{id}',[
                 'as'=>'admin.campanha.enviar',

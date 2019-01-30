@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensage;
-
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Jobs\SendSmsJob;
 class MensagemController extends Controller
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+
     public function index()
     {
 
@@ -65,6 +70,10 @@ class MensagemController extends Controller
             ),
         ));
 
+        $this->dispatch(new SendSmsJob($curl));
+
+
+        /**
         $response = json_decode(curl_exec($curl),true);
         $err = curl_error($curl);
 
@@ -89,7 +98,7 @@ class MensagemController extends Controller
         \Session::flash('mensagem',[
             'msg'=>'SMS enviado com Sucesso !!!',
             'class'=>'green white-text',
-            ]);
+            ]);**/
 
         return redirect()->route('admin.mensagem');
 

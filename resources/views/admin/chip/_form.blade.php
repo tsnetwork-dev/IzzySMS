@@ -23,11 +23,4 @@
     <input type="number" name="mensal" class="validate" value="{{isset($chip->mensal)? $chip->mensal :''}}">
     <label>Limiete Mensal</label>
 </div>
- <div class="switch">
-    <label>
-      Off
-      <input type="checkbox" checked="{{ isset($chip->Habilitado)? True:False }}">
-      <span class="lever"></span>
-      On
-    </label>
-  </div
+

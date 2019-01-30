@@ -9,26 +9,29 @@
 </div>
 
 <div class="row">
-        <table>
+        <table clas="responsive-table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Telefone</th>
                     <th>Mensagem</th>
+                    <th>CPF/CNPJ</th>
+                    <th>Cód. Devedor</th>
+                    <th>Observações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $__currentLoopData = $telefones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $telefone): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($telefone->id); ?></td>
                         <td><?php echo e($telefone->telefone); ?></td>
                         <td><?php echo e($telefone->mensagem); ?></td>
-                        <td><a class="btn-floating  btn-flat btn-small waves-effect waves-lightred red" href="#"><i class="material-icons">delete</i></a></td>
+                        <td><?php echo e($telefone->cpf_cnpj); ?></td>
+                        <td><?php echo e($telefone->cd_devedor); ?></td>
+                        <td><?php echo e($telefone->obs); ?></td>
+
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
             </tbody>
         </table>
-
     </div>
+    <h5>Total de Números na Campanha: <?php echo e($totais->total); ?></h>
 </div>

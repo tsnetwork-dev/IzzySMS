@@ -21,6 +21,7 @@
                         <th>Data</th>
                         <th>Credor</th>
                         <th>Campanha</th>
+                        <th>Telefones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +31,9 @@
                             <td><?php echo e(date ('d/m/Y H:i:s', strtotime($campanha->Data))); ?></td>
                             <td><?php echo e($campanha->cd_credor); ?></td>
                             <td><?php echo e($campanha->nome_campanha); ?></td>
+                            <td><b><?php echo e($campanha->total); ?></b></td>
                             <td>
-                                <a class="btn-floating  btn-flat btn-small waves-effect waves-light green darken-1" href="<?php echo e(route('admin.campanha.envio',$campanha->id)); ?>"><i class="material-icons">assignment_turned_in</i></a>
-                                <a class="btn-floating  btn-flat btn-small waves-effect waves-lightred red" href="#"><i class="material-icons">delete</i></a>
+                                <a class="btn-floating  btn-flat btn-small waves-effect waves-light green darken-1" href="<?php echo e(route('admin.campanha.campanha',$campanha->id)); ?>"><i class="material-icons">assignment_turned_in</i></a>
                             </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

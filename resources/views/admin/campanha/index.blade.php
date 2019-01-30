@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <div class="container">
         <h2 class="center">Campanhas</h2>
@@ -24,19 +23,19 @@
                         <th>Data</th>
                         <th>Credor</th>
                         <th>Campanha</th>
+                        <th>Telefones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($campanhas as $campanha)
+                    @foreach($campanhas as $campanha)
                         <tr>
                             <td>{{$campanha->id}}</td>
                             <td>{{date ('d/m/Y H:i:s', strtotime($campanha->Data))}}</td>
                             <td>{{$campanha->cd_credor}}</td>
                             <td>{{$campanha->nome_campanha}}</td>
+                            <td><b>{{ $campanha->total }}</b></td>
                             <td>
-                                <a class="btn-floating  btn-flat btn-small waves-effect waves-light green darken-1" href="{{route('admin.campanha.envio',$campanha->id)}}"><i class="material-icons">assignment_turned_in</i></a>
-                                
-                                <a class="btn-floating  btn-flat btn-small waves-effect waves-lightred red" href="#"><i class="material-icons">delete</i></a>
+                                <a class="btn-floating  btn-flat btn-small waves-effect waves-light green darken-1" href="{{route('admin.campanha.campanha',$campanha->id)}}"><i class="material-icons">assignment_turned_in</i></a>
                             </td>
                         </tr>
                     @endforeach

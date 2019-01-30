@@ -9,7 +9,7 @@
                 <div class="col s12">
                 <a href="{{route('admin.principal')}}" class="breadcrumb">Inicio</a>
                 <a href="{{route('admin.campanha')}}" class="breadcrumb">Lista de Campanhas</a>
-                <a  class="breadcrumb">Criar Nova CampanhaS</a>
+                <a  class="breadcrumb">Criar Nova Campanha</a>
                 </div>
             </div>
         </nav>

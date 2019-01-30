@@ -28,8 +28,8 @@
                             <span class="card-title grey-text text-darken-4"><?php echo e($chipeira->ip); ?><i class="material-icons right">close</i></span>
                             <p><b>Númeoro de Série: </b><?php echo e($chipeira->Serial); ?><br>
                             <b>Portas: </b><?php echo e($chipeira->Portas); ?><br>
-                            <b>Data de Criação: </b><?php echo e(date ('d/m/Y H:i:s',strtotime($chipeira->created_at))); ?><br>
-                            <b>Data de Atualização: </b><?php echo e(date ('d/m/Y H:i:s',strtotime($chipeira->updated_at))); ?></p>
+                            <b>Mensagens Mês:</b> <b class="blue-text"><?php echo e($chipeira->total); ?></b><br>
+
                             <span><a href="http://<?php echo e($chipeira->ip); ?>/">Acessar Equipamento</a></span>
                         </div>
                     </div>

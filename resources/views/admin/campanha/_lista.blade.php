@@ -9,26 +9,29 @@
 </div>
 
 <div class="row">
-        <table>
+        <table clas="responsive-table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Telefone</th>
                     <th>Mensagem</th>
+                    <th>CPF/CNPJ</th>
+                    <th>Cód. Devedor</th>
+                    <th>Observações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($telefones as $telefone)
                     <tr>
-                        <td>{{$telefone->id}}</td>
                         <td>{{$telefone->telefone}}</td>
                         <td>{{$telefone->mensagem}}</td>
-                        <td><a class="btn-floating  btn-flat btn-small waves-effect waves-lightred red" href="#"><i class="material-icons">delete</i></a></td>
+                        <td>{{$telefone->cpf_cnpj }}</td>
+                        <td>{{$telefone->cd_devedor }}</td>
+                        <td>{{ $telefone->obs }}</td>
+
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
-
     </div>
+    <h5>Total de Números na Campanha: {{ $totais->total}}</h>
 </div>

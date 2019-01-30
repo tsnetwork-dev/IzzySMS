@@ -11,8 +11,14 @@ class ChipeiraController extends Controller
 {
     public function index()
     {
-        $chipeiras = Chipeira::orderBy('id','asc')->paginate(10);
-        
+        $mesatual = date('m');
+        $chipeiras = DB::table('chipeiras')
+                       ->select('chipeiras.id','chipeiras.Modelo','chipeiras.Serial','chipeiras.Portas','ip',DB::raw('count(chipeiras.id) as total'))
+                       ->leftJoin('posts','chipeiras.id','=','posts.chipeira')
+                       ->whereMonth('posts.enviado',$mesatual)
+                       ->groupBy('chipeiras.id')
+                       ->paginate(10);
+
         return view('admin.chipeira.index',compact('chipeiras'));
     }
 
@@ -69,5 +75,12 @@ class ChipeiraController extends Controller
 
         return redirect()->route('admin.chipeira');
 
+    }
+
+    public function getip($id)
+    {
+        $chipeira = Chipeira::find($id);
+
+        return $chipeira->ip;
     }
 }

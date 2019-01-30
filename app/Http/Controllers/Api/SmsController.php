@@ -81,7 +81,7 @@ class SmsController extends Controller
         $codigo = $response['error_code'];
         $time_after = date("Y-m-d H:i:s",time()-50);
 
-        dd($response);
+        sleep(20);
 
         $curlRet = curl_init();
 
@@ -107,22 +107,22 @@ class SmsController extends Controller
 
 			curl_close($curlRet);
 
-			
+
 			$result = json_decode($retorno);
 
 			if(Empty($result->result[0])){
 				$Sms->status = "ERRO";
 				$entrega =  "ERRO";
 				$Sms->entrega = Now();
-			}else{				
-				
+			}else{
+
 				$entrega = $result->result[0]->status;
 				$Sms->status =$result->result[0]->status;
 				$dtentrega = $result->result[0]->time;
-				$Sms->entrega = $dtentrega;				
+				$Sms->entrega = $dtentrega;
 			}
 
-			
+
 
 
         $Sms->save();
@@ -131,7 +131,7 @@ class SmsController extends Controller
         return $entrega;
 
 
-         
+
 
     }
 }
